@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { PaginationDTO } from 'src/common/DTO/pagination.dto';
@@ -9,7 +10,8 @@ import { Pokemon } from './entities/pokemon.entity';
 @Injectable()
 export class PokemonService {
 
-  constructor(@InjectModel(Pokemon.name) private readonly PokemonModel: Model<Pokemon>) {
+  constructor(@InjectModel(Pokemon.name) private readonly PokemonModel: Model<Pokemon>,
+private readonly configService:ConfigService) {
 
   }
   async create(createPokemonDto: CreatePokemonDto) {
